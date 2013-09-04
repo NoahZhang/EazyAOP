@@ -3,7 +3,7 @@
   EazyAOP is a simple AOP implementation for Javascript.
   
 ## Use Case
-  Sample instance 
+  Sample aop component 
   
 ```Javascript
 
