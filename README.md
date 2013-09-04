@@ -59,3 +59,8 @@ var test = eazyAOP.wrapAsync(dologin);
 test();
 
 ```
+
+## Roadmap
+1.Register multiple aop component by name.
+2.Invoke method can specify which component to user.(Service Locator Pattern)
+3.Support NodeJS and browser.
