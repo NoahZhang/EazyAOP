@@ -1,6 +1,6 @@
 # EazyAOP
 
-  EazyAOP is a simple AOP implementation for Javascript.
+  EazyAOP is a simple AOP implementation for Javascript. Reference https://github.com/raganwald/method-combinators.
   
 ## Use Case
   Simple aop component 
