@@ -44,7 +44,6 @@ describe('EazyAOP', function() {
   it('aop for async method', function(done) {
     var aop = new EazyAOP();
     var counter = 0;
-
     var packagePath = path.join(__dirname, '..', 'package.json');
 
     aop.inject.before = function () {
