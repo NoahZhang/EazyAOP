@@ -1,0 +1,33 @@
+{
+  "name": "EazyAOP",
+  "version": "1.0.0",
+  "description": "Simple javascript hook.",
+  "main": "eazyaop.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --harmony node_modules/gulp/bin/gulp.js test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NoahZhang/EazyAOP.git"
+  },
+  "keywords": [
+    "aop",
+    "hook"
+  ],
+  "author": "NoahZhang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NoahZhang/EazyAOP/issues"
+  },
+  "homepage": "https://github.com/NoahZhang/EazyAOP",
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "gulp": "^3.8.11",
+    "gulp-mocha": "^2.0.1",
+    "mocha": "^2.2.4",
+    "should": "^6.0.1"
+  }
+}

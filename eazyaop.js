@@ -52,4 +52,6 @@ EazyAOP.prototype.executeSync = function () {
 
 function noop() {}
 
+module.exports = EazyAOP;
+
 
