@@ -1,4 +1,5 @@
 # EazyAOP
+[![Build Status](https://travis-ci.org/NoahZhang/EazyAOP.svg?branch=master)](https://travis-ci.org/NoahZhang/EazyAOP/)
 
   EazyAOP is a simple AOP implementation for Javascript.
   
