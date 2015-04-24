@@ -1,58 +1,55 @@
 /**
  * @author NoahZhang
  */
-function EazyAOP(inject){
-  this.inject = inject;
+function EazyAOP(inject) {
+  this.inject = inject || {before: noop, after: noop};
+  this.handlers = [];
 }
-			
-EazyAOP.prototype.before = function(target){
-  var self = this;
-				
-  return function(){
-    self.inject.before.apply(self.inject, arguments);
-    return target.apply(self.inject, arguments)
-  };
-}
-			
-EazyAOP.prototype.after = function(target){
-  var self = this;
-				
-  return function(){
-    var value;
-					
-    value = target.apply(self.inject, arguments)
-    self.inject.after.apply(self.inject, arguments);
-					
-    return value;
-  };
-}
-			
-EazyAOP.prototype.wrap = function(target){
+
+EazyAOP.prototype.wrapSync = function(target) {
   var self = this;
 
-  return function(){
-    var value;
-					
-    self.inject.before.apply(self.inject, arguments);
-    value = target.apply(self.inject, arguments);
-    self.inject.after.apply(self.inject, arguments);
-					
-    return value;
-  };
+  var handler = function() {
+                  self.inject.before.apply(self.inject, arguments);
+                  target.apply(null, arguments);
+                  self.inject.after.apply(self.inject, arguments);
+               };
+
+   self.handlers.push(handler);
 }
-			
-EazyAOP.prototype.wrapAsync = function(target){
+
+EazyAOP.prototype.wrapAsync = function(target) {
   var self = this;
 
-  return function(){
-    var args, callback, _i;
-					
+  return function() {
+    var args, callback;
+
     args = arguments.length >= 1 ? [].slice.call(arguments, 0) : [];
-    callback = function(){
-      self.inject.after.apply(self.inject, args);
-    };
-					
-    self.inject.before.apply(self.inject, args);
-    return target.apply(self.inject, args.concat(callback));
+
+    var promise = new Promise(function(resolve, reject) {
+      self.inject.before.apply(self.inject);
+
+      callback = function(error, data) {
+        if (error) return reject(error);
+        resolve(data);
+        self.inject.after.apply(self.inject);
+      };
+
+      target.apply(null, args.concat(callback));
+    });
+
+    return promise;
   };
 }
+
+EazyAOP.prototype.executeSync = function () {
+  var self = this;
+
+  for(var i = 0; i < self.handlers.length; i++) {
+    self.handlers[i].apply(self, arguments);
+  }
+}
+
+function noop() {}
+
+
