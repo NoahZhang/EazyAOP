@@ -3,8 +3,7 @@
   EazyAOP is a simple AOP implementation for Javascript.
   
 ## Use Case
-1.同步方法
-  
+Common
 ```Javascript
 
 var TimeCounter = {
@@ -22,6 +21,10 @@ var TimeCounter = {
 
 var eazyAOP = new EazyAOP(TimeCounter);
 
+```
+
+1.同步方法
+  
 function handler1(){
   var total = 0;
 
