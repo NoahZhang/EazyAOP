@@ -3,7 +3,7 @@
   EazyAOP is a simple AOP implementation for Javascript.
   
 ## Use Case
-Common
+Common:
 ```Javascript
 
 var TimeCounter = {
@@ -23,7 +23,7 @@ var eazyAOP = new EazyAOP(TimeCounter);
 
 ```
 
-1.同步方法
+1.Synchronized methods
 
 ```Javascript
 function handler1(){
@@ -64,44 +64,27 @@ eazyAOP.executeSync();
 
 ```
 
-2.异步方法
+2.Asynchronous method.Async to promise.
 
 ```Javascript
+var eazyAOP = new EazyAOP(TimeCounter);
 
-function handler(){
-  var total = 0;
-				
-  for(var i = 0; i < 10000; i++) {
-	  total += i;
-	}
-					
-  console.log(total);
-}
+var fsPromise1 = eazyAOP.wrapAsync(fs.stat);
+var fsPromise2 = eazyAOP.wrapAsync(fs.stat);
 
-var test = eazyAOP.wrap(handler);
-			
-test();
+fsPromise1("README.md").then(function(data) {
+  console.log(data);
+}, function(error){
+  console.log(error);
+});
+
+fsPromise2("eazyaop.js").then(function(data) {
+  console.log(data);
+}, function(error){
+  console.log(error);
+});
 
 ```
 
-Asynchronous method 
+## TODO
 
-```Javascript
-
-function dologin(callback) {
-  $.get('/app/Settings/test_login', {}, function (data) {
-    console.log(data);
-    callback();
-  });
-}
-
-var test = eazyAOP.wrapAsync(dologin);
-
-test();
-
-```
-
-## Roadmap
-1. Register multiple aop component by name.
-2. Invoke method can specify which aop component to use.(Service Locator Pattern)  
-3. Support NodeJS and browser.
