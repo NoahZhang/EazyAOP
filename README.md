@@ -1,9 +1,9 @@
 # EazyAOP
 
-  EazyAOP is a simple AOP implementation for Javascript. Reference https://github.com/raganwald/method-combinators.
+  EazyAOP is a simple AOP implementation for Javascript.
   
 ## Use Case
-  Simple aop component 
+1.同步方法
   
 ```Javascript
 
@@ -12,6 +12,7 @@ var TimeCounter = {
   end: 0,
   before : function(){
     start = new Date();
+    console.log("start");
   },
   after : function(){
     end = new Date();
@@ -21,9 +22,45 @@ var TimeCounter = {
 
 var eazyAOP = new EazyAOP(TimeCounter);
 
+function handler1(){
+  var total = 0;
+
+  for(var i = 0; i < 10000; i++) {
+      total += i;
+    }
+
+  console.log(total);
+}
+
+function handler2(){
+  var total = 0;
+
+  for(var i = 0; i < 1000; i++) {
+      total += i;
+    }
+
+  console.log(total);
+}
+
+function handler3(){
+  var total = 0;
+
+  for(var i = 0; i < 100; i++) {
+      total += i;
+    }
+
+  console.log(total);
+}
+
+eazyAOP.wrapSync(handler1);
+eazyAOP.wrapSync(handler2);
+eazyAOP.wrapSync(handler3);
+
+eazyAOP.executeSync();
+
 ```
 
-Synchronized method 
+2.异步方法
 
 ```Javascript
 
